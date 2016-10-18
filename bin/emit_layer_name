@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+raise 'Must specify cfn path' if ARGV[0].nil?
+
+stack_filename = ARGV[0]
+
+if stack_filename.end_with?('_dsl.rb')
+  tokens = stack_filename.split('_')
+
+  raise 'Must have format dd_layer_appname_dsl.rb' if tokens.size < 4
+  output = tokens[1]
+elsif stack_filename.end_with?('.json')
+  stack_filename = stack_filename.gsub(/\.json/, '')
+
+  tokens = stack_filename.split('_')
+
+  raise 'Must have format dd_layer_appname.json' if tokens.size < 3
+  output = tokens[1]
+else
+  raise 'must end in _dsl.rb or .json'
+end
+
+puts output

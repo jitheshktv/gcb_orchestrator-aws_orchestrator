@@ -1,0 +1,10 @@
+---
+run_list:
+  - layer: server
+    cfn_template: 60_server_tibco-bw_dsl.rb
+    chef_cookbook: sawgrass-tibco-bw
+  - layer: database
+    cfn_template: 10_database_sawgrass.json
+    oracle_script: main.sql
+  - layer: security
+    cfn_template: 20_security_sawgrass_dsl.rb

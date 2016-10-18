@@ -1,0 +1,71 @@
+---
+env_name: lawnmower
+key_name: alangar
+
+tech_stacks:
+    gcb_tech_stack-dummy:
+      url: http://oo-gitlab.nam.nsroot.net/aws_poc_team/gcb_tech_stack-sawgrass.git
+      branch: master
+      parameters:
+          shared:
+            VpcId: vpc-cb0818af
+            PrivateSubnetIdA: subnet-f7d35edd
+            PrivateSubnetIdB: subnet-6e166a18
+            KeyName: EricKascic
+            ImageId: ami-6dc10300
+          server:
+            SSHFromCIDRBLock: 0.0.0.0/0
+            ELBFromCIDRBlock: 0.0.0.0/0
+            ElbProtocol: HTTP
+            InstanceProtocol: HTTP
+            ELBPort: 80
+            AssociatePublicIpAddr: false
+          database:
+            Owner: citi
+            Project: poc
+            DBName: SAWGRASS
+            DeleteAfter: '1'
+            MasterUsername: orcl
+            MasterUserPassword: Welcome1
+            BackupRetentionPeriod: '1'
+            MultiAvailabilityZone: true
+            TcpPort: '1521'
+    gcb_tech_stack-sawgrass:
+      url: http://oo-gitlab.nam.nsroot.net/aws_poc_team/gcb_tech_stack-sawgrass.git
+      branch: master
+      parameters:
+          shared:
+            VpcId: vpc-cb0818af
+            PrivateSubnetIdA: subnet-f7d35edd
+            PrivateSubnetIdB: subnet-6e166a18
+            KeyName: EricKascic
+            ImageId: ami-6dc10300
+          server:
+            SSHFromCIDRBLock: 0.0.0.0/0
+            ELBFromCIDRBlock: 0.0.0.0/0
+            ElbProtocol: HTTP
+            InstanceProtocol: HTTP
+            ELBPort: 80
+            AssociatePublicIpAddr: false
+          database:
+            Owner: citi
+            Project: poc
+            DBName: SAWGRASS
+            DeleteAfter: '1'
+            MasterUsername: orcl
+            MasterUserPassword: Welcome1
+            BackupRetentionPeriod: '1'
+            MultiAvailabilityZone: true
+            TcpPort: '1521'
+            #AlertSnsTopicArn:
+            #PreferredBackupWindow:
+            #PreferredMaintenanceWindow:
+            #AllocatedStorage:
+            #ConfigureProvisionedIops:
+            #SnapshotOnDelete:
+            #AutoMinorVersionUpgrade:
+            #SetupAlarms:
+            #ProvisionedIopsValue:
+            #InstanceType:
+            #DBParameterGroupName:
+            #OptionGroupName:

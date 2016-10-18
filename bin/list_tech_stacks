@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require 'yaml'
+
+manifest_path = ARGV[0].nil? ? 'tech_stacks/manifest.yml' : ARGV[0]
+
+tech_stacks = YAML.load IO.read(manifest_path)
+unless tech_stacks['tech_stacks'].nil?
+  tech_stacks['tech_stacks'].each { |tech_stack| print tech_stack + ' ' }
+end

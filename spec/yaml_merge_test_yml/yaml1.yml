@@ -1,0 +1,5 @@
+---
+environment:
+  name: dev
+  common_parameters:
+    vpc_id: vpc-1234

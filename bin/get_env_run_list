@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require_relative '../lib/yaml_get'
+
+yaml_file = ARGV[0]
+path = ARGV[1]
+
+base_list = YamlGetter.new.get yaml: IO.read(yaml_file),
+                              yaml_path: path
+run_list = base_list.keys
+puts run_list.join(' ').strip

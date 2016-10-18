@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+require_relative '../lib/yaml_get'
+
+yaml_file = ARGV[0]
+path = ARGV[1]
+
+component_map = {
+  "database" => "oracle_script",
+  "security" => "",
+  "policy" => "",
+  "server" => "chef_cookbook"
+}
+
+base_list = YamlGetter.new.get yaml: IO.read(yaml_file),
+                              yaml_path: path
+run_list = base_list.collect { |component|
+  cfn_template = component["cfn_template"]
+  layer = component["layer"]
+  child_component_type = component_map[layer]
+  child_component = component[child_component_type]
+  "#{cfn_template}=#{child_component_type}=#{child_component}"
+}
+puts run_list.join(' ').strip

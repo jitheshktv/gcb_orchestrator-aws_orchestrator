@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require_relative '../lib/yaml_merge'
+
+yaml_file1 = ARGV[0]
+yaml_file2 = ARGV[1]
+
+merged_yaml = YamlMerger.new.merge IO.read(yaml_file1), IO.read(yaml_file2)
+
+puts merged_yaml

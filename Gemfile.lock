@@ -1,0 +1,29 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aws-sdk (2.2.31)
+      aws-sdk-resources (= 2.2.31)
+    aws-sdk-core (2.2.31)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.2.31)
+      aws-sdk-core (= 2.2.31)
+    aws-sdk-utils (0.0.20)
+      aws-sdk (= 2.2.31)
+      cfndsl (= 0.4.0)
+      trollop (= 2.1.2)
+    cfndsl (0.4.0)
+    jmespath (1.2.4)
+      json_pure (>= 1.8.1)
+    json_pure (1.8.3)
+    ruby_dig (0.0.2)
+    trollop (2.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  aws-sdk-utils
+  ruby_dig
+
+BUNDLED WITH
+   1.11.2

@@ -1,0 +1,16 @@
+---
+driver:
+  name: docker
+
+platforms:
+- name: centos-5.11
+  driver_config:
+    image: <%= ENV['DOCKER_IMAGE']%>
+    platform: rhel
+    http_proxy: <%= ENV['HTTP_PROXY'] %>
+    https_proxy: <%= ENV['HTTP_PROXY'] %>
+    no_proxy: "<%= ENV['NO_PROXY'] %>"
+suites:
+- name: default
+  run_list:
+  - recipe[<%= ENV['COOKBOOK']%>]

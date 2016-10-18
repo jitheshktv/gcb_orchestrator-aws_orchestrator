@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require_relative '../lib/local_role'
+
+role_arns = LocalRole.new.discover
+if role_arns.is_a? Array
+  role_arns.each { |role_arn| print "#{role_arn} " }
+else
+  puts role_arns
+end

@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+require_relative '../lib/yaml_get'
+
+yaml_file = ARGV[0]
+path = ARGV[1]
+in_progress_metadata = "inventory/in_progress.yml"
+
+yaml_getter = YamlGetter.new
+
+db_params = yaml_getter.get yaml: IO.read(yaml_file), yaml_path: path
+rds_host = yaml_getter.get yaml: IO.read(in_progress_metadata), yaml_path: "RDSHostname"
+
+cfn_oracle_conn_params = ["DBName", "MasterUsername", "MasterUserPassword", "TcpPort"]
+
+unless cfn_oracle_conn_params.all? {|p| db_params.key? p}
+  raise "Oracle connection params (#{cfn_oracle_conn_params.join(", ")}) are missing from the environment manifest.yml"
+end
+
+if rds_host.nil?
+  raise "RDSHostname not found in the CFN output."
+end
+
+puts [db_params["MasterUsername"], db_params["MasterUserPassword"], rds_host, db_params["TcpPort"], db_params["DBName"]]

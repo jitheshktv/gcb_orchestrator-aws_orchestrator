@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'aws-sdk'
+require 'cfndsl'
+
+cloudformation_stack_name = ARGV[0]
+# Delete the specified Cloudformation stack by name
+#
+resource = Aws::CloudFormation::Resource.new
+stack_to_delete = resource.stack(cloudformation_stack_name)
+
+stack_to_delete.delete
+begin
+  stack_to_delete.wait_until(max_attempts:100, delay:15) do |stack|
+    stack.stack_status.match /DELETE_COMPLETE/
+  end
+rescue
+  #squash any errors - when stack is gone, the waiter might freak
+end

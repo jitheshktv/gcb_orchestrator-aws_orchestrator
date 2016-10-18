@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require_relative '../lib/yaml_cut'
+
+yaml_file = ARGV[0]
+path = ARGV[1]
+
+cut_yaml = YamlCutter.new.cut yaml: IO.read(yaml_file),
+                              yaml_path: path
+puts cut_yaml

@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+raise 'Must specify cfn path' if ARGV[0].nil?
+
+stack_filename = ARGV[0]
+
+def emit_stack_name_for_cfndsl_file(stack_filename)
+  tokens = stack_filename.split('_')
+  output = ''
+
+  raise 'Must have format dd_layer_appname_dsl.rb' if tokens.size < 4
+  (1..(tokens.size - 2)).each do |dex|
+    output += tokens[dex]
+
+    output += '-' if dex == 1
+  end
+  output
+end
+
+def emit_stack_name_for_vanilla_cfn(stack_filename)
+  output = ''
+
+  stack_filename = stack_filename.gsub(/\.json/, '')
+
+  tokens = stack_filename.split('_')
+
+  raise 'Must have format dd_layer_appname.json' if tokens.size < 3
+  (1..(tokens.size - 1)).each do |dex|
+    output += tokens[dex]
+
+    output += '-' if dex == 1
+  end
+  output
+end
+
+if stack_filename.end_with?('_dsl.rb')
+  puts emit_stack_name_for_cfndsl_file(stack_filename)
+elsif stack_filename.end_with?('.json')
+  puts emit_stack_name_for_vanilla_cfn(stack_filename)
+else
+  raise 'must end in _dsl.rb or .json'
+end
